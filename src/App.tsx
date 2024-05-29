@@ -1,5 +1,5 @@
 import Form from "./components/Form"
-import { useReducer } from "react"
+import { useEffect, useReducer } from "react"
 import { activityReducer, initialState } from "./reducers/activityReducer"
 import ActivityList from "./components/ActivityList"
 
@@ -13,6 +13,10 @@ function App() {
   // initialState: estado inicial del reducer a utilizar 
   // dispatch es una fución especial que nos va a permitir ejecutar las ActivitiActions(en este proyecto se llaman asi), esta función es para que react sepa cuando va a llamar a disparar la acción
   const [state, dispatch] = useReducer(activityReducer, initialState)
+
+  useEffect(() => {
+    localStorage.setItem('activities', JSON.stringify(state.activities))
+  }, [state.activities])
 
   return (
     <>
